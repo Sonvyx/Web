@@ -4,12 +4,19 @@
 .header {
   --background-color: rgba(255, 255, 255, 0);
   --default-color: #ffffff;
-  --heading-color: #ffffff;
+  --heading-color: #c49696;
+  --scroll-color: darkslategray;
   color: var(--default-color);
   background-color: var(--background-color);
   padding: 20px 0;
   transition: all 0.5s;
   z-index: 997;
+}
+
+.header.scrolled {
+  background-color: var(--scroll-color);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px); /* optional for glassy effect */
 }
 
 .header .logo {
@@ -331,4 +338,5 @@
   &:hover{
     background-color: #1acc8d;
   }
+
 }

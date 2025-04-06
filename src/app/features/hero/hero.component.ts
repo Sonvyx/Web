@@ -10,5 +10,4 @@ import { RouterOutlet } from '@angular/router';
   styleUrls: ['./hero.component.scss']
 })
 export class HeroComponent {
-  
 }

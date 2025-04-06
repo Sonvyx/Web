@@ -7,6 +7,8 @@ import { FaqComponent } from './features/faq/fag.component';
 import { FooterComponent } from './features/footer/footer.component';
 import { HeroComponent } from './features/hero/hero.component';
 import { NavigationComponent } from './features/navigation/navigation.component';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 @Component({
   selector: 'app-root',
@@ -16,4 +18,11 @@ import { NavigationComponent } from './features/navigation/navigation.component'
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
+  ngOnInit(): void {
+    AOS.init({
+      duration: 1000,
+      once: false
+    });
+  }
 }

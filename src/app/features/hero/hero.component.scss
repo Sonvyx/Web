@@ -248,6 +248,22 @@ ul {
   }
 }
 
+@keyframes moveUpDownForever {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px); /* Pomera se gore */
+  }
+  100% {
+    transform: translateY(0); /* Vraća se na početnu poziciju */
+  }
+}
+
+.move-forever1 {
+  animation: moveUpDownForever 2s ease-in-out infinite;
+}
+
 .custom-card {
   width: 240px; /* bilo je 280px */
   min-height: 470px;

@@ -1,83 +1,134 @@
 <!-- Contact Section -->
 <section id="contact" class="contact section">
   <!-- Section Title -->
-  <div class="container section-title" data-aos="fade-up">
-    <h2>Kontaktirajte nas</h2>
+  <div class="container section-title text-center" data-aos="fade-up">
+    <h2>Kontakt</h2>
     <div>
-      <span>Check Our</span> <span class="description-title">Contact</span>
+      <span>Imate pitanje ili trebate pomoć?</span>
+      <span class="description-title"
+        >Slobodno nas kontaktirajte! Naš tim je uvijek tu da vam pomogne.</span
+      >
     </div>
   </div>
   <!-- End Section Title -->
 
-  <div class="container" data-aos="fade" data-aos-delay="100">
+  <div class="container mt-5" data-aos="fade" data-aos-delay="100">
     <div class="row gy-4">
-      <div class="col-lg-4">
-        <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
-          <i class="bi bi-envelope flex-shrink-0"></i>
-          <div>
-            <h3>Pošaljite nam Email</h3>
-            <!-- <p>studio@sonvyx.com</p> -->
-          </div>
-        </div>
-        <!-- End Info Item -->
-      </div>
-
-      <div class="col-lg-8">
+      <div class="col-lg-12">
         <form
-          action="forms/contact.php"
-          method="post"
+          [formGroup]="contactForm"
+          (ngSubmit)="onSubmit()"
           class="php-email-form"
           data-aos="fade-up"
           data-aos-delay="200"
         >
           <div class="row gy-4">
+            <!-- Name Input -->
             <div class="col-md-6">
               <input
                 type="text"
-                name="name"
+                formControlName="name"
                 class="form-control"
-                placeholder="Your Name"
-                required=""
+                placeholder="Ime"
               />
+              <div
+                *ngIf="
+                  (submitted ||
+                    contactForm.get('name')?.dirty ||
+                    contactForm.get('name')?.touched) &&
+                  contactForm.get('name')?.invalid
+                "
+                class="text-danger"
+              >
+                <small *ngIf="contactForm.get('name')?.hasError('required')"
+                  >Ime je obavezno.</small
+                >
+                <small *ngIf="contactForm.get('name')?.hasError('minlength')"
+                  >Ime mora sadržavati najmanje 3 znaka.</small
+                >
+              </div>
             </div>
 
+            <!-- Email Input -->
             <div class="col-md-6">
               <input
                 type="email"
+                formControlName="email"
                 class="form-control"
-                name="email"
-                placeholder="Your Email"
-                required=""
+                placeholder="Email"
               />
+              <div
+                *ngIf="
+                  (submitted ||
+                    contactForm.get('email')?.dirty ||
+                    contactForm.get('email')?.touched) &&
+                  contactForm.get('email')?.invalid
+                "
+                class="text-danger"
+              >
+                <small *ngIf="contactForm.get('email')?.hasError('required')"
+                  >Email is obavezan.</small
+                >
+                <small *ngIf="contactForm.get('email')?.hasError('email')"
+                  >Molimo Vas unesite validnu Email adresu.</small
+                >
+              </div>
             </div>
 
+            <!-- Subject Input -->
             <div class="col-md-12">
               <input
                 type="text"
+                formControlName="subject"
                 class="form-control"
-                name="subject"
-                placeholder="Subject"
-                required=""
+                placeholder="Naslov"
               />
+              <div
+                *ngIf="
+                  (submitted ||
+                    contactForm.get('subject')?.dirty ||
+                    contactForm.get('subject')?.touched) &&
+                  contactForm.get('subject')?.invalid
+                "
+                class="text-danger"
+              >
+                <small *ngIf="contactForm.get('subject')?.hasError('required')"
+                  >Naslov je obavezan.</small
+                >
+              </div>
             </div>
 
+            <!-- Message Textarea -->
             <div class="col-md-12">
               <textarea
                 class="form-control"
-                name="message"
+                formControlName="message"
                 rows="6"
-                placeholder="Message"
-                required=""
+                placeholder="Poruka"
               ></textarea>
+              <div
+                *ngIf="
+                  (submitted ||
+                    contactForm.get('message')?.dirty ||
+                    contactForm.get('message')?.touched) &&
+                  contactForm.get('message')?.invalid
+                "
+                class="text-danger"
+              >
+                <small *ngIf="contactForm.get('message')?.hasError('required')"
+                  >Poruka je obavezna.</small
+                >
+                <small *ngIf="contactForm.get('message')?.hasError('minlength')"
+                  >Poruka mora sadržavati najmanje 10 znakova.</small
+                >
+              </div>
             </div>
 
-            <div class="col-md-12 text-center">
-              <div class="loading">Obrada</div>
-              <div class="error-message"></div>
-              <div class="sent-message">Vaša poruka je poslana. Hvala!</div>
-
-              <button type="submit">Pošalji</button>
+            <!-- Submit Button -->
+            <div class="col-md-12 text-end">
+              <button type="submit" class="contact-btn mb-5">Pošalji</button>
             </div>
+            <h1>{{ successMessage }}</h1>
           </div>
         </form>
       </div>

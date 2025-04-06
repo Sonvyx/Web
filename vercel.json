@@ -2,8 +2,8 @@
   "builds": [
     {
       "src": "angular.json",
-      "use": "@vercel/angular"
+      "use": "@vercel/node"
     }
   ],
-  "outputDirectory": "dist/web"
+  "outputDirectory": "dist/your-app-name"
 }

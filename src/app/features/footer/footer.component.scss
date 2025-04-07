@@ -48,11 +48,13 @@
   color: color-mix(in srgb, var(--default-color), transparent 30%);
   margin-right: 10px;
   transition: 0.3s;
+  text-decoration: none !important;
 }
 
 .footer .social-links a:hover {
-  color: var(--accent-color);
+  color: white;
   border-color: var(--accent-color);
+  text-decoration: none;
 }
 
 .footer h4 {
@@ -155,6 +157,7 @@
 }
 
 .footer .credits {
+  color: white !important;
   margin-top: 6px;
   font-size: 13px;
 }

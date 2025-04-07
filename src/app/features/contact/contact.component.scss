@@ -46,6 +46,7 @@
 .contact .php-email-form textarea {
   font-size: 14px;
   padding: 10px 15px;
+  border: 2px solid gray;
   box-shadow: none;
   border-radius: 0;
   color: var(--default-color);
@@ -62,7 +63,7 @@
 .contact .php-email-form input[type=text]::placeholder,
 .contact .php-email-form input[type=email]::placeholder,
 .contact .php-email-form textarea::placeholder {
-  color: color-mix(in srgb, var(--default-color), transparent 70%);
+  color: color-mix(in srgb, var(--default-color), transparent 20%);
 }
 
 .contact-btn {

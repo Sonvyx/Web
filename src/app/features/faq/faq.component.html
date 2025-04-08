@@ -1,5 +1,5 @@
 <!-- Faq Section -->
-<section id="faq" class="faq section light-background">
+<section id="faq" class="faq section light-background mt-5">
   <div class="container-fluid">
     <div class="row gy-4">
       <div
@@ -18,8 +18,8 @@
           data-aos="fade-up"
           data-aos-delay="200"
         >
+          @for (faq of faqs; track $index) {
           <mat-expansion-panel
-            *ngFor="let faq of faqs"
             class="faq-item"
             (opened)="panelOpenState.set(true)"
             (closed)="panelOpenState.set(false)"
@@ -31,6 +31,7 @@
               <p class="faq-response">{{ faq.answer }}</p>
             </div>
           </mat-expansion-panel>
+          }
         </mat-accordion>
       </div>
 

@@ -13,6 +13,11 @@
   z-index: 997;
 }
 
+.dark-bg {
+  background-color: darkslategray !important; 
+  color: #fff; 
+}
+
 .header.scrolled {
   background-color: var(--scroll-color);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -24,7 +29,7 @@
 }
 
 .header .logo img {
-  max-height: 32px;
+  max-width: 170px;
   margin-right: 8px;
 }
 
@@ -322,7 +327,7 @@
   font-weight: 500;
 
   &:hover{
-    background-color: #1acc8d;
+    background-color: #4d6e8f;
   }
 }
 
@@ -336,7 +341,7 @@
   text-align: center; 
   font-weight: 500;
   &:hover{
-    background-color: #1acc8d;
+    background-color: #4d6e8f;
   }
 
 }

@@ -1,5 +1,5 @@
 import { APP_INITIALIZER, ApplicationConfig, importProvidersFrom } from '@angular/core';
-import { provideRouter, withComponentInputBinding } from '@angular/router';
+import { provideRouter, RouterModule, withComponentInputBinding } from '@angular/router';
 
 import {
   HTTP_INTERCEPTORS,
@@ -25,6 +25,7 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(
       BrowserModule,
       BrowserAnimationsModule,
+      RouterModule.forRoot(routes)
     ),
     {
       provide: APP_INITIALIZER,

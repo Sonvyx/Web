@@ -1,7 +1,7 @@
 <header
   id="header"
   class="header d-flex align-items-center fixed-top"
-  [ngClass]="{ scrolled: isScrolled }"
+  [ngClass]="{ scrolled: isScrolled, 'dark-bg': isWhiteBackground }"
 >
   <div
     class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between"
@@ -21,9 +21,6 @@
         <li><a href="#hero" class="active">Kontakt</a></li>
         <div class="d-flex gap-3">
           <button href="#prijava" class="btn price-btn-sign-in">Prijava</button>
-          <button href="#registracija" class="btn price-btn-sign-up">
-            Registracija
-          </button>
         </div>
       </ul>
       <i

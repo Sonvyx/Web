@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
+import { ContactResponse } from './models/responses/contact.response.model';
 import { ContactService } from './services/contact.service';
 
 @Component({
@@ -14,7 +15,7 @@ import { ContactService } from './services/contact.service';
 })
 export class ContactComponent {
   contactForm!: FormGroup;
-  submitted: boolean = false;
+  isFormSubmitted: boolean = false;
   successMessage?: string = '';
 
   constructor(private fb: FormBuilder, private contactService: ContactService) { }
@@ -24,12 +25,12 @@ export class ContactComponent {
   }
 
   onSubmit(): void {
-    this.submitted = true;
+    this.isFormSubmitted = true;
     if (this.contactForm.valid) {
       this.contactService
       .contact(this.contactForm.value)
       .subscribe({
-        next: (res) => {
+        next: (res: ContactResponse) => {
           this.successMessage = res.message;
         },
         error: (errResponse: {

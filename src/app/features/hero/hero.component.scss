@@ -3,7 +3,7 @@
 --------------------------------------------------------------*/
 .hero {
   width: 100%;
-  min-height: 70vh;
+  min-height: 100vh;
   position: relative;
   padding: 130px 0px !important;
   display: flex;
@@ -125,7 +125,7 @@ ul {
 
 .hero .btn-get-started:hover {
   color: var(--contrast-color);
-  background: color-mix(in srgb, var(--accent-color), transparent 15%);
+  background-color: #4d6e8f;
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
   text-decoration: none;
 }

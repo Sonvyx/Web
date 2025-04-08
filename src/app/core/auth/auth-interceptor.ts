@@ -22,7 +22,7 @@ export class AuthInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     let baseUrl = '';
 
-    if (req.url.startsWith('/api/contact')) {
+    if (req.url.startsWith('/api/contact') || req.url.startsWith('/api/registration')) {
       baseUrl = this._configService.config.api;
     }
 

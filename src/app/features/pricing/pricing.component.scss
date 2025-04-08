@@ -84,7 +84,7 @@
 }
 
 .pricing .cta-btn:hover {
-  background: var(--accent-color);
+  background-color: #4d6e8f;
   color: var(--contrast-color);
   border-color: var(--accent-color);
 }
@@ -109,7 +109,7 @@
 }
 
 .pricing ul i {
-  color: #059652;
+  color: #4d6e8f;
   font-size: 24px;
   padding-right: 3px;
 }
@@ -148,6 +148,10 @@
   background: var(--accent-color);
   color: var(--contrast-color);
   border-color: var(--accent-color);
+
+  &:hover{
+    background-color: #4d6e8f;
+  }
 }
 
 /* Medija upiti za različite veličine ekrana */

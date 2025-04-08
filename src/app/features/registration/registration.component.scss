@@ -1,0 +1,175 @@
+.registration{
+  margin-top: 150px;
+}
+
+.registration h2{
+ font-weight: 800 !important;
+}
+
+.registration .registration-item {
+  animation: pulse 2.5s infinite;
+  background-color: white;
+  padding: 40px 40px;
+  height: 100%;
+  width: 50%;
+  border-radius: 15px;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Hover efekat za sjaj i zoom */
+.registration-item:hover {
+  animation: none;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
+}
+
+/* Pulsirajući efekat sa crnom pozadinom */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), 0 0 40px rgba(255, 255, 255, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.registration .form-label {
+    font-weight: bold;
+  }
+  
+  .registration .form-control {
+    margin-bottom: 10px;
+  }
+  
+  .registration .btn {
+    margin-top: 20px;
+  }
+  
+  .text-danger {
+    font-size: 0.875rem;
+    color: #dc3545;
+  }
+  
+  .registration .php-email-form {
+    height: 100%;
+  }
+  
+  .registration .php-email-form input[type=text],
+  .registration .php-email-form input[type=email],
+  .registration .php-email-form input[type=password],
+  .registration .php-email-form textarea {
+    font-size: 14px;
+    padding: 10px 15px;
+    border: 2px solid gray;
+    box-shadow: none;
+    border-radius: 0;
+    color: var(--default-color);
+    background-color: color-mix(in srgb, var(--background-color), transparent 50%);
+    border-color: color-mix(in srgb, var(--default-color), transparent 80%);
+  }
+  
+  .registration .php-email-form input[type=text]:focus,
+  .registration .php-email-form input[type=email]:focus,
+  .registration .php-email-form input[type=password]:focus
+  .registration .php-email-form textarea:focus {
+    border-color: var(--accent-color);
+  }
+  
+  .registration .php-email-form input[type=text]::placeholder,
+  .registration .php-email-form input[type=email]::placeholder,
+  .registration .php-email-form input[type=password]::placeholder,
+  .registration .php-email-form textarea::placeholder {
+    color: color-mix(in srgb, var(--default-color), transparent 20%);
+  }
+  
+  .registration-btn {
+    background-color: #304050;
+    border-radius: 8%;
+    color: white; 
+    padding: 10px 30px; 
+    text-decoration: none; 
+    display: inline-block;
+    text-align: center; 
+    font-weight: 500;
+  }
+  
+  .registration-btn:hover {
+    background-color: #4d6e8f;
+  }
+  
+  /* Naslovi i dugmići */
+.registration h2 {
+  color: #304050;
+  font-weight: 600;
+}
+
+.registration h3 {
+  font-weight: 600;
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+
+.registration h4 {
+  color: var(--accent-color);
+  font-size: 48px;
+  font-weight: 700;
+  font-family: var(--heading-font);
+  margin-bottom: 0;
+}
+
+.registration h4 sup {
+  font-size: 28px;
+}
+
+.registration h4 span {
+  color: color-mix(in srgb, var(--default-color), transparent 50%);
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.registration ul {
+  padding: 0;
+  list-style: none;
+  color: color-mix(in srgb, var(--default-color), transparent 30%);
+  text-align: left;
+  line-height: 20px;
+}
+
+.registration ul li {
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+}
+
+.registration ul li:last-child {
+  padding-bottom: 0;
+}
+
+.registration ul i {
+  color: #4d6e8f;
+  font-size: 24px;
+  padding-right: 3px;
+}
+
+.registration ul .na {
+  color: color-mix(in srgb, var(--default-color), transparent 60%);
+}
+
+.registration ul .na i {
+  color: color-mix(in srgb, var(--default-color), transparent 60%);
+}
+
+.registration ul .na span {
+  text-decoration: line-through;
+}
+
+
+@media (max-width: 768px) {
+  .registration .registration-item {
+    width: 100%;
+  }
+}

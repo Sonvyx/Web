@@ -1,0 +1,125 @@
+<!-- Registration Section -->
+<section id="registration" class="registration section">
+  <!-- Section Title -->
+  <div class="container section-title text-center">
+    <h2>Registracija</h2>
+  </div>
+  <!-- End Section Title -->
+  <div class="container py-5 d-flex justify-content-center align-items-center">
+    <div class="row w-100">
+      <!-- Second Registration Form (Right next to the first one) -->
+      <div class="col-lg-12 d-flex flex-column flex-md-row gap-4">
+        <div class="registration-item">
+          <h3>TikTok Plan</h3>
+          <h4><sup>€</sup>25<span> / Mjesečno</span></h4>
+          <ul>
+            <li><i class="bi bi-check"></i><span>Discord pristup</span></li>
+            <li>
+              <i class="bi bi-check"></i><span>Nagradne igre do 500€</span>
+            </li>
+            <li><i class="bi bi-check"></i><span>Video lekcije</span></li>
+            <li><i class="bi bi-check"></i><span>Predavanja</span></li>
+            <li><i class="bi bi-check"></i><span>Niche Drop</span></li>
+          </ul>
+        </div>
+        <form
+          [formGroup]="registrationForm"
+          (ngSubmit)="onSubmit()"
+          class="php-email-form w-100 registration-item"
+        >
+          <!-- First Name -->
+          <div class="mb-3">
+            <input
+              type="text"
+              id="firstName"
+              formControlName="firstName"
+              class="form-control"
+              placeholder="Ime"
+            />
+            @if (isFormSubmitted || registrationForm.get('firstName')?.dirty ||
+            registrationForm.get('firstName')?.touched &&
+            registrationForm.get('firstName')?.invalid) { @if
+            (registrationForm.get('firstName')?.hasError('required')) {
+            <div class="text-danger">Ime je obavezno.</div>
+            } }
+          </div>
+
+          <!-- Last Name -->
+          <div class="mb-3">
+            <input
+              type="text"
+              id="lastName"
+              formControlName="lastName"
+              class="form-control"
+              placeholder="Prezime"
+            />
+            @if (isFormSubmitted || registrationForm.get('lastName')?.dirty ||
+            registrationForm.get('lastName')?.touched &&
+            registrationForm.get('lastName')?.invalid) { @if
+            (registrationForm.get('lastName')?.hasError('required')) {
+            <div class="text-danger">Prezime je obavezno.</div>
+            } }
+          </div>
+
+          <!-- Email -->
+          <div class="mb-3">
+            <input
+              type="email"
+              id="email"
+              formControlName="email"
+              class="form-control"
+              placeholder="Email"
+            />
+            @if (isFormSubmitted || registrationForm.get('email')?.dirty ||
+            registrationForm.get('email')?.touched &&
+            registrationForm.get('email')?.invalid) { @if
+            (registrationForm.get('email')?.hasError('required')) {
+            <div class="text-danger">Molimo unesite validan email.</div>
+            } }
+          </div>
+
+          <!-- Password -->
+          <div class="mb-3">
+            <input
+              type="password"
+              id="password"
+              formControlName="password"
+              class="form-control"
+              placeholder="Lozinka"
+            />
+            @if (isFormSubmitted || registrationForm.get('password')?.dirty ||
+            registrationForm.get('password')?.touched &&
+            registrationForm.get('password')?.invalid) { @if
+            (registrationForm.get('password')?.hasError('required')) {
+            <div class="text-danger">Lozinka mora biti najmanje 8 znakova.</div>
+            } }
+          </div>
+
+          <!-- Confirm Password -->
+          <!-- <div class="mb-3">
+            <input
+              type="password"
+              id="confirmPassword"
+              formControlName="confirmPassword"
+              class="form-control"
+              placeholder="Potvrdi Lozinku"
+            />
+            @if (isFormSubmitted ||
+            registrationForm.get('confirmPassword')?.dirty ||
+            registrationForm.get('confirmPassword')?.touched &&
+            registrationForm.get('confirmPassword')?.invalid) { @if
+            (registrationForm.get('confirmPassword')?.hasError('required')) {
+            <div class="text-danger">Lozinke se ne podudaraju.</div>
+            } }
+          </div> -->
+
+          <!-- Submit Button -->
+          <button type="submit" class="btn registration-btn">
+            Registruj se
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /Registration Section -->

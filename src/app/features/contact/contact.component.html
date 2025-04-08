@@ -31,22 +31,17 @@
                 class="form-control"
                 placeholder="Ime"
               />
-              <div
-                *ngIf="
-                  (submitted ||
-                    contactForm.get('name')?.dirty ||
-                    contactForm.get('name')?.touched) &&
-                  contactForm.get('name')?.invalid
-                "
-                class="text-danger"
-              >
-                <small *ngIf="contactForm.get('name')?.hasError('required')"
-                  >Ime je obavezno.</small
-                >
-                <small *ngIf="contactForm.get('name')?.hasError('minlength')"
-                  >Ime mora sadržavati najmanje 3 znaka.</small
-                >
+              @if (isFormSubmitted || contactForm.get('name')?.dirty ||
+              contactForm.get('name')?.touched &&
+              contactForm.get('name')?.invalid) {
+              <div class="text-danger">
+                @if (contactForm.get('name')?.hasError('required')) {
+                <small>Ime je obavezno.</small>
+                } @if (contactForm.get('name')?.hasError('minlength')) {
+                <small>Ime mora sadržavati najmanje 3 znaka.</small>
+                }
               </div>
+              }
             </div>
 
             <!-- Email Input -->
@@ -57,22 +52,17 @@
                 class="form-control"
                 placeholder="Email"
               />
-              <div
-                *ngIf="
-                  (submitted ||
-                    contactForm.get('email')?.dirty ||
-                    contactForm.get('email')?.touched) &&
-                  contactForm.get('email')?.invalid
-                "
-                class="text-danger"
-              >
-                <small *ngIf="contactForm.get('email')?.hasError('required')"
-                  >Email je obavezan.</small
-                >
-                <small *ngIf="contactForm.get('email')?.hasError('email')"
-                  >Molimo Vas unesite validnu Email adresu.</small
-                >
+              @if (isFormSubmitted || contactForm.get('email')?.dirty ||
+              contactForm.get('email')?.touched &&
+              contactForm.get('email')?.invalid) {
+              <div class="text-danger">
+                @if (contactForm.get('email')?.hasError('required')) {
+                <small>Email je obavezan.</small>
+                } @if (contactForm.get('email')?.hasError('email')) {
+                <small>Molimo Vas unesite validnu Email adresu.</small>
+                }
               </div>
+              }
             </div>
 
             <!-- Subject Input -->
@@ -83,19 +73,15 @@
                 class="form-control"
                 placeholder="Naslov"
               />
-              <div
-                *ngIf="
-                  (submitted ||
-                    contactForm.get('subject')?.dirty ||
-                    contactForm.get('subject')?.touched) &&
-                  contactForm.get('subject')?.invalid
-                "
-                class="text-danger"
-              >
-                <small *ngIf="contactForm.get('subject')?.hasError('required')"
-                  >Naslov je obavezan.</small
-                >
+              @if (isFormSubmitted || contactForm.get('subject')?.dirty ||
+              contactForm.get('subject')?.touched &&
+              contactForm.get('subject')?.invalid) {
+              <div class="text-danger">
+                @if (contactForm.get('subject')?.hasError('required')) {
+                <small>Naslov je obavezan.</small>
+                }
               </div>
+              }
             </div>
 
             <!-- Message Textarea -->
@@ -106,22 +92,17 @@
                 rows="6"
                 placeholder="Poruka"
               ></textarea>
-              <div
-                *ngIf="
-                  (submitted ||
-                    contactForm.get('message')?.dirty ||
-                    contactForm.get('message')?.touched) &&
-                  contactForm.get('message')?.invalid
-                "
-                class="text-danger"
-              >
-                <small *ngIf="contactForm.get('message')?.hasError('required')"
-                  >Poruka je obavezna.</small
-                >
-                <small *ngIf="contactForm.get('message')?.hasError('minlength')"
-                  >Poruka mora sadržavati najmanje 10 znakova.</small
-                >
+              @if (isFormSubmitted || contactForm.get('message')?.dirty ||
+              contactForm.get('message')?.touched &&
+              contactForm.get('message')?.invalid) {
+              <div class="text-danger">
+                @if (contactForm.get('message')?.hasError('required')) {
+                <small>Poruka je obavezna.</small>
+                } @if (contactForm.get('message')?.hasError('minlength')) {
+                <small>Poruka mora sadržavati najmanje 10 znakova.</small>
+                }
               </div>
+              }
             </div>
 
             <!-- Submit Button -->

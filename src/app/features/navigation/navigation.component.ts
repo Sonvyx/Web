@@ -14,13 +14,25 @@ import { RouterOutlet } from '@angular/router';
 export class NavigationComponent {
   isMobileMenuOpen: boolean = false;
   isScrolled: boolean = false;
+  isWhiteBackground = false;
+
   @HostListener('window:scroll', [])
 
-  onWindowScroll=(): void=> {
+  onWindowScroll = (): void => {
     this.isScrolled = window.scrollY > 40;
+    this.checkBackgroundColor();
   }
 
-  toggleMobileMenu=(): void=> {
+  ngOnInit(): void {
+    this.checkBackgroundColor();
+  }
+
+  toggleMobileMenu = (): void => {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
+  }
+
+  checkBackgroundColor = ():void =>{
+    const bodyBackgroundColor = window.getComputedStyle(document.body).backgroundColor;
+    this.isWhiteBackground = bodyBackgroundColor === 'rgb(255, 255, 255)';
   }
 }

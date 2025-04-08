@@ -41,7 +41,6 @@ export class RegistrationComponent implements OnInit {
       })
     } 
   }
-  }
 
   initiateForm = (): void =>{
     this.registrationForm = this.fb.group({

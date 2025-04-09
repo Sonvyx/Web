@@ -30,9 +30,8 @@ export class NavigationComponent {
   toggleMobileMenu = (): void => {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
   }
-
-  checkBackgroundColor = ():void =>{
-    const bodyBackgroundColor = window.getComputedStyle(document.body).backgroundColor;
-    this.isWhiteBackground = bodyBackgroundColor === 'rgb(255, 255, 255)';
-  }
+  checkBackgroundColor = (): void => {
+    const excludedPaths = ['/', '/index.html', '/home'];
+    this.isWhiteBackground = !excludedPaths.includes(window.location.pathname);
+  };
 }

@@ -5,6 +5,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { FooterComponent } from './features/footer/footer.component';
 import { NavigationComponent } from './features/navigation/navigation.component';
+import { ScrollRestorationService } from './core/services/scrollposition.service';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,10 @@ import { NavigationComponent } from './features/navigation/navigation.component'
 })
 export class AppComponent {
 
+  constructor(private _scrollRestorationService: ScrollRestorationService){
+
+  }
+  
   ngOnInit(): void {
     AOS.init({
       duration: 1000,

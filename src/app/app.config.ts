@@ -25,7 +25,9 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(
       BrowserModule,
       BrowserAnimationsModule,
-      RouterModule.forRoot(routes)
+      RouterModule.forRoot(routes, {
+        scrollPositionRestoration: 'enabled',
+      })
     ),
     {
       provide: APP_INITIALIZER,

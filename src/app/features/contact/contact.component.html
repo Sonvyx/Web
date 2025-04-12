@@ -106,10 +106,14 @@
             </div>
 
             <!-- Submit Button -->
+
             <div class="col-md-12 text-end">
-              <button type="submit" class="contact-btn mb-5">Pošalji</button>
+              <button type="submit" class="contact-btn mb-5">
+                @if ( !loading){ Pošalji} @else{
+                <span class="spinner"></span>
+                }
+              </button>
             </div>
-            <h1>{{ successMessage }}</h1>
           </div>
         </form>
       </div>

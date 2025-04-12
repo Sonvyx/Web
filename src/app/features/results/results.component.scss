@@ -1,0 +1,29 @@
+.slider {
+  position: relative;
+  width: 70%;
+  margin: auto;
+}
+
+.slider-image {
+  width: 100%;
+  display: block;
+}
+
+button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.5);
+  color: white;
+  border: none;
+  padding: 1em;
+  cursor: pointer;
+}
+
+button:first-of-type {
+  left: 0;
+}
+
+button:last-of-type {
+  right: 0;
+}

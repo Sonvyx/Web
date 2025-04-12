@@ -18,7 +18,7 @@ export class RegistrationComponent implements OnInit {
   registrationForm!: FormGroup;
   isFormSubmitted: boolean = false;
   successMessage?: string = '';
-  constructor(private fb: FormBuilder, private registrationService: RegistrationService, private _paypalService: PaypalService) {}
+  constructor(private _fb: FormBuilder, private _registrationService: RegistrationService, private _paypalService: PaypalService) {}
 
   ngOnInit(): void {
     this.initiateForm();
@@ -37,7 +37,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   initiateForm = (): void =>{
-    this.registrationForm = this.fb.group({
+    this.registrationForm = this._fb.group({
       firstName: ['', [Validators.required, Validators.minLength(2)]],
       lastName: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email]],
@@ -48,26 +48,36 @@ export class RegistrationComponent implements OnInit {
   private renderPaypalButton =(): void=> {
     if (window.paypal) {
       window.paypal.Buttons({
-        createOrder: (data: any, actions: any) => actions.order.create({
-          purchase_units: [{
-            amount: {
-              value: '10.00',
-            },
-          }],
-        }),
+        createOrder: (data: any, actions: any) => {
+          return actions.order.create({
+            purchase_units: [{
+              amount: {
+                value: '44.00'
+              }
+            }]
+          });
+        },
   
         onApprove: (data: any, actions: any) => actions.order.capture().then((details: any)  => {
-          if(details.status === 'COMPLETED'){
-            this.handleRegistrationConfirmation();
-          }
+          
+          return actions.order.capture().then((details: any) => {
+            if(details.status === 'COMPLETED'){
+              alert('Uspešna uplata od ' + details.payer.name.given_name);
+              console.log('Detalji:', details);
+              this.handleRegistrationConfirmation();
+            }
+          });
 
         }),
+        onError: (err: any) => {
+          console.error('PayPal error:', err);
+        }
       }).render('#paypal-button-container');
     }
   }
 
   private handleRegistrationConfirmation  = (): void =>{
-    this.registrationService
+    this._registrationService
       .registration(this.registrationForm.value)
       .subscribe({
        next: (res: RegistrationResponse) => {

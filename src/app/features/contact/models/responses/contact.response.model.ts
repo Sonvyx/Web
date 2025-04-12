@@ -1,4 +1,4 @@
 export class ContactResponse {
-    message?: string;
+    message!: string;
   }
   

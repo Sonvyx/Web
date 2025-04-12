@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { RouterOutlet } from '@angular/router';
 import { ContactResponse } from './models/responses/contact.response.model';
 import { ContactService } from './services/contact.service';
+import { SnackbarService } from '../../core/services/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-contact',
@@ -11,14 +12,14 @@ import { ContactService } from './services/contact.service';
   imports: [CommonModule, RouterOutlet, ReactiveFormsModule],
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.scss'],
-  providers: [ContactService]
+  providers: [ContactService, SnackbarService]
 })
 export class ContactComponent {
   contactForm!: FormGroup;
   isFormSubmitted: boolean = false;
-  successMessage?: string = '';
+  loading: boolean = false;
 
-  constructor(private fb: FormBuilder, private contactService: ContactService) { }
+  constructor(private _fb: FormBuilder, private _contactService: ContactService, private _snackBarService: SnackbarService) { }
 
   ngOnInit(): void {
     this.InitializeForm();
@@ -27,23 +28,27 @@ export class ContactComponent {
   onSubmit(): void {
     this.isFormSubmitted = true;
     if (this.contactForm.valid) {
-      this.contactService
+      this.loading = true;
+      this._contactService
       .contact(this.contactForm.value)
       .subscribe({
         next: (res: ContactResponse) => {
-          this.successMessage = res.message;
+          this._snackBarService.showMessage(res.message);
         },
         error: (errResponse: {
           status: number;
           error: { errors: { description: string }[] };
         }) => {
         },
+      }).add(()=>{
+        this.loading = false;
+        this.InitializeForm();
       })
     } 
   }
 
   InitializeForm = () =>{
-    this.contactForm = this.fb.group({
+    this.contactForm = this._fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
       subject: ['', [Validators.required]],

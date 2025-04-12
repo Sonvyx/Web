@@ -6,11 +6,12 @@ import { ContactComponent } from '../contact/contact.component';
 import { FaqComponent } from '../faq/fag.component';
 import { HeroComponent } from '../hero/hero.component';
 import { PricingComponent } from '../pricing/pricing.component';
+import { ResultsComponent } from '../results/results.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterModule, HeroComponent, AboutComponent, FaqComponent, ContactComponent, PricingComponent],
+  imports: [CommonModule, RouterOutlet, RouterModule, HeroComponent, AboutComponent, FaqComponent, ContactComponent, PricingComponent, ResultsComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

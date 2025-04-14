@@ -28,11 +28,14 @@ export class RegistrationComponent implements OnInit {
     this.isFormSubmitted = true;
 
     if (this.registrationForm.valid) {
-      this._paypalService.loadPaypalScript().then(() => {
-        this.renderPaypalButton();
-      }).catch((error) => {
-        console.error(error);
-      });
+      if (typeof window !== 'undefined') {
+        // Only load PayPal in the browser (not during SSR)
+        this._paypalService.loadPaypalScript().then(() => {
+          this.renderPaypalButton();
+        }).catch((error) => {
+          console.error(error);
+        });
+      }
     } 
   }
 
@@ -45,36 +48,44 @@ export class RegistrationComponent implements OnInit {
     },);
   }
 
-  private renderPaypalButton =(): void=> {
+  private renderPaypalButton = (): void => {
+    const container = document.getElementById('paypal-button-container');
+    if (container) {
+      container.innerHTML = ''; 
+    }
+
     if (window.paypal) {
       window.paypal.Buttons({
         createOrder: (data: any, actions: any) => {
           return actions.order.create({
             purchase_units: [{
               amount: {
-                value: '44.00'
+                value: '44.00',
+                currency_code: 'USD',
               }
             }]
-          });
+          }).then((orderID: any) => {
+            console.log('Created order ID:', orderID);
+            return orderID;
+          });;
         },
   
-        onApprove: (data: any, actions: any) => actions.order.capture().then((details: any)  => {
-          
+        onApprove: (data: any, actions: any) => {
           return actions.order.capture().then((details: any) => {
-            if(details.status === 'COMPLETED'){
-              alert('Uspešna uplata od ' + details.payer.name.given_name);
+            if (details.status === 'COMPLETED') {
               console.log('Detalji:', details);
               this.handleRegistrationConfirmation();
             }
           });
-
-        }),
+        },
+  
         onError: (err: any) => {
           console.error('PayPal error:', err);
         }
       }).render('#paypal-button-container');
     }
   }
+  
 
   private handleRegistrationConfirmation  = (): void =>{
     this._registrationService

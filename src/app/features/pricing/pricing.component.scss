@@ -36,7 +36,6 @@
   }
 }
 
-/* Naslovi i dugmići */
 .pricing h2 {
   color: #304050;
   font-weight: 600;
@@ -66,7 +65,6 @@
   font-weight: 500;
 }
 
-/* Dugme - CTA */
 .pricing .cta-btn {
   border: 1px solid var(--default-color);
   color: var(--default-color);
@@ -89,7 +87,6 @@
   border-color: var(--accent-color);
 }
 
-/* Lista */
 .pricing ul {
   padding: 0;
   list-style: none;
@@ -126,7 +123,6 @@
   text-decoration: line-through;
 }
 
-/* Popularni plan */
 .pricing .featured {
   position: relative;
 }
@@ -154,7 +150,6 @@
   }
 }
 
-/* Medija upiti za različite veličine ekrana */
 @media (max-width: 992px) {
   .pricing .box {
     max-width: 60%;

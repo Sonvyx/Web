@@ -6,57 +6,84 @@
 
   /* Fonts */
 :root {
-  --default-font: "Roboto",  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --heading-font: "Raleway",  sans-serif;
-  --nav-font: "Poppins",  sans-serif;
-}
-
-/* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
-:root { 
-  --background-color: #ffffff; /* Background color for the entire website, including individual sections */
-  --default-color: #444444; /* Default color used for the majority of the text content across the entire website */
-  --heading-color: darkslategray; /* Color for headings, subheadings and title throughout the website */
-  --accent-color: #304050; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
-  --surface-color: #ffffff; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
-  --contrast-color: #ffffff; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
-}
-
-/* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
-:root {
+  --default-font: "Roboto", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --heading-font: "Raleway", sans-serif;
+  --nav-font: "Poppins", sans-serif;
+  
+  /* Brand Colors */
+  --primary-color: #ff724c;  /* Main brand color - dark blue */
+  --primary-light: #4d6e8f;  /* Lighter shade of primary */
+  --primary-dark: #1e2b3a;   /* Darker shade of primary */
+  --accent-color: #050a30;  /* Accent color - #050a30 */
+  --accent-light: #3d5953;  /* Lighter shade of accent */
+  --accent-dark: #1a2524;   /* Darker shade of accent */
+  
+  /* Button Colors (single source for ALL buttons) */
+  --btn-color: #ff724c;  /* Button color */
+  --btn-hover: #4d6e8f;  /* Button hover color */
+  
+  /* Text Colors */
+  --text-light: #ffffff;  /* Text on dark backgrounds */
+  --text-dark: #444444;   /* Main text color */
+  --text-muted: #b8c2cc;  /* Subdued text */
+  
+  /* Background Colors */
+  --background-color: #ffffff; /* Background color for the entire website */
+  --bg-light: var(--bg-dark);  /* Light background */
+  --bg-dark: #232b3a;   /* Dark background */
+  --surface-color: var(--bg-dark);  /* Card background */
+  --contrast-color: var(--bg-dark); /* Contrast color for text */
+  
+  /* Gradients */
+  --gradient-primary: linear-gradient(90deg, var(--primary-color) 0%, var(--primary-light) 100%);
+  --gradient-accent: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-light) 100%);
+  --gradient-button: linear-gradient(135deg, var(--btn-color) 0%, var(--btn-hover) 100%);
+  --gradient-button-hover: linear-gradient(135deg, var(--btn-hover) 0%, var(--btn-color) 100%);
+  
+  /* Border radius */
+  --border-radius: 5px;
+  --border-radius-lg: 1rem;
+  
+  /* Box shadow */
+  --shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  --shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+  
+  /* Transitions */
+  --transition: all 0.3s ease;
+  
+  /* Nav Menu Colors */
   --nav-color: #ffffff;  /* The default color of the main navmenu links */
-  --nav-hover-color: #304050; /* Applied to main navmenu links when they are hovered over or active */
-  --nav-mobile-background-color: #ffffff; /* Used as the background color for mobile navigation menu */
-  --nav-dropdown-background-color: #ffffff; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
-  --nav-dropdown-color: #444444; /* Used for navigation links of the dropdown items in the navigation menu. */
-  --nav-dropdown-hover-color: #304050; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
+  --nav-hover-color: #ff724c; /* Applied to main navmenu links when they are hovered over or active */
+  --nav-mobile-background-color: --bg-dark; /* Used as the background color for mobile navigation menu */
+  --nav-dropdown-background-color: --bg-dark; /* Used as the background color for dropdown items */
+  --nav-dropdown-color: #444444; /* Used for navigation links of the dropdown items */
+  --nav-dropdown-hover-color: #ff724c; /* Similar to --nav-hover-color */
+  
+  /* Smooth scroll */
+  scroll-behavior: auto !important;
 }
 
-/* Color Presets - These classes override global colors when applied to any section or element, providing reuse of the sam color scheme. */
-
+/* Color Presets - These classes override global colors */
 .light-background {
   --background-color: #f4f5fe;
   --surface-color: #ffffff;
 }
 
 .dark-background {
-  --background-color: darkslategray;
+  --background-color: #050a30;
   --default-color: #ffffff;
-  --heading-color: #ffffff;
-  --surface-color: darkslategray;
+  --heading-color: #ffffff !important;
+  --surface-color: #050a30;
   --contrast-color: #ffffff;
-}
-
-/* Smooth scroll */
-:root {
-  scroll-behavior: auto !important;
 }
 
 /*--------------------------------------------------------------
 # General Styling & Shared Classes
 --------------------------------------------------------------*/
 body {
-  color: var(--default-color);
-  background-color: var(--background-color);
+  color: var(--text-dark);
+  background-color: var(--bg-dark);
   font-family: var(--default-font);
 }
 
@@ -71,18 +98,110 @@ a:hover {
   text-decoration: none;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
   color: var(--heading-color);
   font-family: var(--heading-font);
 }
 
+/*--------------------------------------------------------------
+# Section Title Styles - Global
+--------------------------------------------------------------*/
+.section-title-main {
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: var(--primary-color);
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 16px rgba(77,110,143,0.15);
+}
 
+.section-title-sub {
+  color: var(--text-muted);
+  font-size: 1.15rem;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.5px;
+}
 
+/*--------------------------------------------------------------
+# Button Styles - UNIFIED FOR ALL BUTTONS
+--------------------------------------------------------------*/
+.btn-primary,
+.price-btn-sign-in,
+.login-btn,
+button[type=submit],
+.contact-btn,
+.card .btn {
+  background: var(--gradient-button);
+  border: none;
+  color: var(--text-light);
+  padding: 0.75rem 1.5rem; /* Standard padding */
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+  font-weight: 500;
+  box-shadow: var(--shadow-sm);
+  display: inline-block;
+  text-align: center;
+  min-width: 120px;
+  height: 48px; /* Fixed height for all buttons */
+  line-height: 1.2; /* Consistent line height */
+  white-space: nowrap;
+  cursor: pointer;
+  vertical-align: middle; /* Align text vertically */
+  text-decoration: none; /* No underline */
+}
+
+.btn-primary:hover, 
+.btn-primary:focus,
+.price-btn-sign-in:hover,
+.price-btn-sign-in:focus,
+.login-btn:hover,
+.login-btn:focus,
+button[type=submit]:hover,
+button[type=submit]:focus,
+.contact-btn:hover,
+.contact-btn:focus,
+.card .btn:hover,
+.card .btn:focus {
+  background: var(--gradient-button-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+  color: var(--text-light);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--btn-color);
+  border: 1px solid var(--btn-color);
+  padding: 0.75rem 1.5rem; /* Standard padding */
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+  font-weight: 500;
+  min-width: 120px;
+  height: 48px; /* Fixed height for all buttons */
+  line-height: 1.2; /* Consistent line height */
+  display: inline-block;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle; /* Align text vertically */
+  text-decoration: none; /* No underline */
+}
+
+.btn-outline:hover,
+.btn-outline:focus {
+  background: rgba(48, 64, 80, 0.1);
+  color: var(--btn-hover);
+  transform: translateY(-2px);
+}
+
+.main-bg{
+  background-color: var(--bg-dark) !important;
+}
 /* Importing Bootstrap SCSS file. */
 @import 'bootstrap/scss/bootstrap';
 @import 'aos/dist/aos.css';

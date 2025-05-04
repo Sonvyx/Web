@@ -1,48 +1,83 @@
 <section id="hero" class="hero section dark-background">
-  <img src="assets/img/hero-bg-2.jpg" alt="" class="hero-bg" />
+  <div class="hero-bg-wrapper">
+    <div class="hero-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+      <div class="shape shape-4"></div>
+    </div>
+    <div class="overlay"></div>
+  </div>
 
   <div class="container hero-content">
-    <div class="row gy-4 align-items-center">
-      <div
-        class="col-lg-9 d-flex flex-column justify-content-center"
-        data-aos="fade-in"
-      >
-        <h1>
-          Nauči kako zaraditi do <span>5000€</span> mjesečno - na
-          <span>YouTube-u</span> i <span>TikTok-u!</span>
+    <div class="row align-items-center">
+      <div class="col-lg-7 hero-text-container" data-aos="fade-right" data-aos-delay="100">
+        <h1 class="headline">
+          Nauči kako zaraditi do <span class="highlight">5000€</span> mjesečno - na
+          <span class="highlight">YouTube-u</span> i <span class="highlight">TikTok-u!</span>
         </h1>
-        <p class="font-italic">
-          Trenutno su u toku posebne akcije na sve pakete <br />
-          čak, i ako <b>nemaš</b> prethodnog iskustva.
-        </p>
-        <div class="d-flex hero-buttons">
-          <a href="#about" class="btn-get-started">O nama</a>
+        <div class="hero-description" data-aos="fade-up" data-aos-delay="200">
+          <p>
+            Trenutno su u toku posebne akcije na sve pakete
+            čak, i ako <b>nemaš</b> prethodnog iskustva.
+          </p>
+        </div>
+        <div class="hero-buttons" data-aos="fade-up" data-aos-delay="300">
+          <a href="#about" class="btn-get-started">Saznaj više</a>
           <a
             href="https://www.youtube.com/watch?v=Y7f98aduVJ8"
             class="glightbox btn-watch-video d-flex align-items-center"
             ><i class="bi bi-play-circle"></i
-            ><span class="hero-video">Video</span></a
-          >
+            ><span class="hero-video">Pogledaj video</span></a>
+        </div>
+      </div>
+      <div class="col-lg-5 d-none d-lg-block" data-aos="zoom-in" data-aos-delay="200">
+        <div class="hero-device">
+          <div class="device-mockup">
+            <div class="device-frame">
+              <div class="device-status-bar">
+                <div class="status-bar-time">20:45</div>
+                <div class="status-bar-icons">
+                  <i class="bi bi-reception-4"></i>
+                  <i class="bi bi-wifi"></i>
+                  <i class="bi bi-battery-half"></i>
+                </div>
+              </div>
+              <img src="assets/img/slider/slider2.jpg" alt="TikTok zarada" class="device-screen">
+              <div class="device-screen-overlay"></div>
+              
+              <!-- TikTok-style UI elements -->
+              <div class="tiktok-ui">
+                <div class="tiktok-right-controls">
+                  <div class="tiktok-control">
+                    <i class="bi bi-heart-fill"></i>
+                    <span>85.4K</span>
+                  </div>
+                  <div class="tiktok-control">
+                    <i class="bi bi-chat-fill"></i>
+                    <span>1.2K</span>
+                  </div>
+                  <div class="tiktok-control share-control">
+                    <i class="bi bi-share-fill"></i>
+                    <span>4.7K</span>
+                  </div>
+                </div>
+                <div class="tiktok-bottom">
+                  <div class="tiktok-username">
+                    <strong>&#64;sonvyx</strong>
+                    <div class="tiktok-caption">Pogledaj moju zaradu 🔥 #zarada #tiktoknovac #eurzarada</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="device-stripe"></div>
+            <div class="device-header"></div>
+            <div class="device-sensors"></div>
+            <div class="device-btns"></div>
+            <div class="device-power"></div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-
-  <!-- Waves SVG -->
-  <svg
-    class="hero-waves"
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 24 150 28"
-    preserveAspectRatio="none"
-  >
-    <defs>
-      <path
-        id="wave-path"
-        d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"
-      ></path>
-    </defs>
-    <g class="wave1"><use xlink:href="#wave-path" x="50" y="3"></use></g>
-    <g class="wave2"><use xlink:href="#wave-path" x="50" y="0"></use></g>
-    <g class="wave3"><use xlink:href="#wave-path" x="50" y="9"></use></g>
-  </svg>
 </section>

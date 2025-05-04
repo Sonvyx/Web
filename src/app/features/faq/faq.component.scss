@@ -3,7 +3,7 @@
 --------------------------------------------------------------*/
 
 .about-title {
-  color: #304050;
+  color: #ff724c;
   font-weight: 600;
 }
 
@@ -11,10 +11,11 @@
 .faq .content h3 {
   font-weight: 400;
   font-size: 34px;
+  color: white;
 }
 
 .faq .content p {
-  color: darkslategray;
+  color: white;
 }
 
 .faq .faq-container {
@@ -22,7 +23,7 @@
 }
 
 .faq .faq-container .faq-item {
-  background: #304050;
+  background: #ff724c;
   position: relative;
   padding: 20px;
   margin-bottom: 20px;
@@ -46,7 +47,7 @@
 
 
 .faq .faq-container .faq-item h3:hover {
-  color: darkslategray;
+  color: #050a30;
 }
 
 .faq .faq-container .faq-item .faq-content {
@@ -57,14 +58,85 @@
 }
 
 .faq-response{
-  color: white;
+  color: #050a30;
 }
 
 .mat-expansion-panel-header-title, .mat-expansion-panel-header-description{
-  color: white;
+  color: #050a30;
   font-weight: 600;
   font-size: 17px;
   line-height: 24px;
   transition: 0.3s;
   cursor: pointer;
+}
+
+/* Wave Animation */
+.hero-waves {
+  display: block;
+  width: 100%;
+  height: 60px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+.wave1 use {
+  animation: move-forever1 10s linear infinite;
+  animation-delay: -2s;
+  fill: var(--surface-color);
+  opacity: 0.6;
+}
+
+.wave2 use {
+  animation: move-forever2 8s linear infinite;
+  animation-delay: -2s;
+  fill: var(--surface-color);
+  opacity: 0.4;
+}
+
+.wave3 use {
+  animation: move-forever3 6s linear infinite;
+  animation-delay: -2s;
+  fill: var(--surface-color);
+}
+
+@keyframes move-forever1 {
+  0% {
+    transform: translate(85px, 0%);
+  }
+
+  100% {
+    transform: translate(-90px, 0%);
+  }
+}
+
+@keyframes move-forever2 {
+  0% {
+    transform: translate(-90px, 0%);
+  }
+
+  100% {
+    transform: translate(85px, 0%);
+  }
+}
+
+@keyframes move-forever3 {
+  0% {
+    transform: translate(-90px, 0%);
+  }
+
+  100% {
+    transform: translate(85px, 0%);
+  }
+}
+
+.faq {
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 60px; /* Add space for the waves */
+}
+
+.mat-expansion-indicator{
+  color: black;
 }

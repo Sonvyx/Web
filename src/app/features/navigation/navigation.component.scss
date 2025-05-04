@@ -5,7 +5,7 @@
   --background-color: rgba(255, 255, 255, 0);
   --default-color: #ffffff;
   --heading-color: #c49696;
-  --scroll-color: darkslategray;
+  --scroll-color: #050a30;
   color: var(--default-color);
   background-color: var(--background-color);
   padding: 20px 0;
@@ -14,7 +14,7 @@
 }
 
 .dark-bg {
-  background-color: darkslategray !important; 
+  background-color: #050a30 !important; 
   color: #fff; 
 }
 
@@ -29,7 +29,7 @@
 }
 
 .header .logo img {
-  max-width: 170px;
+  max-width: 114px; 
   margin-right: 8px;
 }
 
@@ -316,10 +316,10 @@
   }
 }
 
-.price-btn-sign-in {
-  background-color: #304050;
+.btn-sign-in {
+  background-color: #ff724c;
   border-radius: 8%;
-  color: white; 
+  color: #050a30; 
   padding: 10px 30px; 
   text-decoration: none; 
   display: inline-block;
@@ -327,14 +327,16 @@
   font-weight: 500;
 
   &:hover{
-    background-color: #4d6e8f;
+    background-color: #050a30;
+    color:white;
+    border: 1px solid white;
   }
 }
 
 .price-btn-sign-up {
-  background-color: #304050;
+  background-color: #ff724c;
   border-radius: 8%;
-  color: white; 
+  color: #050a30; 
   padding: 10px 30px; 
   text-decoration: none; 
   display: inline-block;

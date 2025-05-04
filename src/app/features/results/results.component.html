@@ -1,8 +1,29 @@
-<div class="results container mt-3">
-  <h2 class="text-center">Rezultati</h2>
-</div>
-<div class="slider py-5">
-  <img [src]="images[currentIndex]" class="slider-image" alt="Slide Image" />
-  <button (click)="prev()">‹</button>
-  <button (click)="next()">›</button>
-</div>
+<section class="results-section">
+  <!-- Waves SVG -->
+  <svg
+  class="hero-waves"
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 24 150 28"
+  preserveAspectRatio="none"
+  >
+  <defs>
+    <path
+      id="wave-path"
+      d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"
+    ></path>
+  </defs>
+  <g class="wave1"><use xlink:href="#wave-path" x="50" y="3"></use></g>
+  <g class="wave2"><use xlink:href="#wave-path" x="50" y="0"></use></g>
+  <g class="wave3"><use xlink:href="#wave-path" x="50" y="9"></use></g>
+  </svg>
+  <div class="container section-title text-center mt-5 mb-5">
+    <h2 class="section-title-main">Rezultati</h2>
+    <div class="section-title-sub">Pogledajte stvarne rezultate i isplate naših korisnika.</div>
+  </div>
+  <div class="results-phones d-flex flex-row flex-column flex-md-row justify-content-center align-items-center gap-4 mb-4">
+    <img src="assets/img/slider/slider1.jpg" alt="TikTok statistika" class="phone-img" />
+    <img src="assets/img/slider/slider2.jpg" alt="TikTok zarada" class="phone-img" />
+    <img src="assets/img/slider/slider3.jpg" alt="PayPal notifikacija" class="phone-img" />
+    <img src="assets/img/slider/slider4.jpg" alt="PayPal notifikacija" class="phone-img" />
+  </div>
+</section>

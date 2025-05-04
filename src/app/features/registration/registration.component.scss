@@ -1,40 +1,126 @@
-.registration{
-  margin-top: 150px;
+.registration {
+  padding-top: 80px;
 }
 
-.registration h2{
- font-weight: 800 !important;
+.registration h2 {
+  margin-bottom: 20px;
 }
 
-.registration .registration-item {
-  animation: pulse 2.5s infinite;
-  background-color: white;
-  padding: 40px 40px;
-  height: 100%;
-  width: 50%;
-  border-radius: 15px;
-  border: 2px solid rgba(0, 0, 0, 0.1);
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease-in-out;
+.registration-item {
+  padding: 30px;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: var(--transition);
+  background-color: var(--bg-card);
+  flex: 1;
+  min-width: 300px;
 }
 
-/* Hover efekat za sjaj i zoom */
 .registration-item:hover {
-  animation: none;
-  box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
 }
 
-/* Pulsirajući efekat sa crnom pozadinom */
-@keyframes pulse {
-  0% {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 0, 0, 0.1);
-  }
-  50% {
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), 0 0 40px rgba(255, 255, 255, 0.4);
-  }
-  100% {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 0, 0, 0.1);
-  }
+.registration-item h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: var(--primary-color);
+}
+
+.registration-item h4 {
+  font-size: 48px;
+  color: var(--accent-color);
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.registration-item h4 sup {
+  font-size: 24px;
+  position: relative;
+  top: -15px;
+}
+
+.registration-item h4 span {
+  color: var(--text-muted);
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.registration-item ul {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 20px;
+}
+
+.registration-item ul li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.registration-item ul li i {
+  color: var(--accent-color);
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+.registration-item button {
+  background: var(--gradient-blue);
+  color: var(--text-light);
+  border: none;
+  padding: 10px 20px;
+  border-radius: var(--border-radius);
+  font-weight: 500;
+  transition: var(--transition);
+  width: 100%;
+  min-width: 120px;
+  #050a30-space: nowrap;
+}
+
+.registration-item button:hover {
+  background: var(--gradient-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.form-control {
+  margin-bottom: 15px;
+  border-radius: var(--border-radius);
+  border: 1px solid #ced4da;
+  transition: var(--transition);
+}
+
+.form-control:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 0.2rem rgba(47, 79, 79, 0.25);
+}
+
+.alert {
+  border-radius: var(--border-radius);
+  margin-bottom: 15px;
+}
+
+.login-btn {
+  background: var(--gradient-blue);
+  color: var(--text-light);
+  border: none;
+  width: 100%;
+  padding: 10px;
+  border-radius: var(--border-radius);
+  font-weight: 500;
+  transition: var(--transition);
+  cursor: pointer;
+  min-width: 120px;
+}
+
+.login-btn:hover {
+  background: var(--gradient-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
 }
 
 .registration .form-label {
@@ -87,9 +173,9 @@
   }
   
   .registration-btn {
-    background-color: #304050;
+    background-color: #ff724c;
     border-radius: 8%;
-    color: white; 
+    color: #050a30; 
     padding: 10px 30px; 
     text-decoration: none; 
     display: inline-block;
@@ -103,7 +189,7 @@
   
   /* Naslovi i dugmići */
 .registration h2 {
-  color: #304050;
+  color: #ff724c;
   font-weight: 600;
 }
 

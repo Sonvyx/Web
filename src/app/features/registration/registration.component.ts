@@ -5,6 +5,7 @@ import { RouterOutlet } from '@angular/router';
 import { RegistrationResponse } from './models/responses/contact.response.model';
 import { RegistrationService } from './services/registration.service';
 import { PaypalService } from '../../core/services/paypal/paypal.service';
+import { Package, PackageService } from '../../core/services/package.service';
 
 @Component({
   selector: 'app-registration',
@@ -18,18 +19,31 @@ export class RegistrationComponent implements OnInit {
   registrationForm!: FormGroup;
   isFormSubmitted: boolean = false;
   successMessage?: string = '';
-  constructor(private _fb: FormBuilder, private _registrationService: RegistrationService, private _paypalService: PaypalService) {}
+  selectedPackage: Package | null = null;
+
+  constructor(
+    private _fb: FormBuilder, 
+    private _registrationService: RegistrationService, 
+    private _paypalService: PaypalService,
+    private _packageService: PackageService
+  ) {}
 
   ngOnInit(): void {
     this.initiateForm();
+    // Get the selected package from the service
+    this.selectedPackage = this._packageService.getSelectedPackage();
   }
 
-  onSubmit = (): void =>{
+  selectPackage(pkg: Package): void {
+    this.selectedPackage = pkg;
+    this._packageService.setSelectedPackage(pkg);
+  }
+
+  onSubmit = (): void => {
     this.isFormSubmitted = true;
 
-    if (this.registrationForm.valid) {
+    if (this.registrationForm.valid && this.selectedPackage) {
       if (typeof window !== 'undefined') {
-        // Only load PayPal in the browser (not during SSR)
         this._paypalService.loadPaypalScript().then(() => {
           this.renderPaypalButton();
         }).catch((error) => {
@@ -39,13 +53,13 @@ export class RegistrationComponent implements OnInit {
     } 
   }
 
-  initiateForm = (): void =>{
+  initiateForm = (): void => {
     this.registrationForm = this._fb.group({
       firstName: ['', [Validators.required, Validators.minLength(2)]],
       lastName: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
-    },);
+    });
   }
 
   private renderPaypalButton = (): void => {
@@ -54,20 +68,20 @@ export class RegistrationComponent implements OnInit {
       container.innerHTML = ''; 
     }
 
-    if (window.paypal) {
+    if (window.paypal && this.selectedPackage) {
       window.paypal.Buttons({
         createOrder: (data: any, actions: any) => {
           return actions.order.create({
             purchase_units: [{
               amount: {
-                value: '44.00',
-                currency_code: 'USD',
+                value: this.selectedPackage?.price.toString() || '25.00',
+                currency_code: 'EUR',
               }
             }]
           }).then((orderID: any) => {
             console.log('Created order ID:', orderID);
             return orderID;
-          });;
+          });
         },
   
         onApprove: (data: any, actions: any) => {
@@ -85,21 +99,26 @@ export class RegistrationComponent implements OnInit {
       }).render('#paypal-button-container');
     }
   }
-  
 
-  private handleRegistrationConfirmation  = (): void =>{
-    this._registrationService
-      .registration(this.registrationForm.value)
-      .subscribe({
-       next: (res: RegistrationResponse) => {
-
-      this.successMessage = res.message;
-      },
-       error: (errResponse: {
-       status: number;
-       error: { errors: { description: string }[] };
-      }) => {
-      },
-      })
+  private handleRegistrationConfirmation = (): void => {
+    if (this.selectedPackage) {
+      const registrationData = {
+        ...this.registrationForm.value,
+        packageId: this.selectedPackage.id
+      };
+      
+      this._registrationService
+        .registration(registrationData)
+        .subscribe({
+          next: (res: RegistrationResponse) => {
+            this.successMessage = res.message;
+          },
+          error: (errResponse: {
+            status: number;
+            error: { errors: { description: string }[] };
+          }) => {
+          },
+        });
+    }
   }
 }

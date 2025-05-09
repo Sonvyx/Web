@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterModule, RouterOutlet } from '@angular/router';
+import { RouterModule, RouterOutlet, Router } from '@angular/router';
+import { Package, PackageService } from '../../core/services/package.service';
 
 @Component({
   selector: 'app-pricing',
@@ -10,5 +11,13 @@ import { RouterModule, RouterOutlet } from '@angular/router';
   styleUrls: ['./pricing.component.scss']
 })
 export class PricingComponent {
-  
+  constructor(
+    private _packageService: PackageService,
+    private _router: Router
+  ) {}
+
+  selectAndNavigate(pkg: Package): void {
+    this._packageService.setSelectedPackage(pkg);
+    this._router.navigate(['/register']);
+  }
 }

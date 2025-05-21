@@ -9,7 +9,10 @@ export class RegistrationService {
   constructor(private _httpClient: HttpClient) {}
 
   registration = (registrationRequest: RegistrationRequest): Observable<RegistrationResponse> => {
-    console.log(registrationRequest);
     return this._httpClient.post<RegistrationResponse>('/api/registration', registrationRequest);
   };
+
+  register(registrationRequest: RegistrationRequest): Observable<any> {
+    return this._httpClient.post<any>(`/api/registration`, registrationRequest);
+  }
 }

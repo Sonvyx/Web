@@ -1,0 +1,29 @@
+<div class="videos-container">
+  <div class="videos-header">
+    <h1>TikTok Video Lekcije</h1>
+    <p>Pogledajte naše ekskluzivne video lekcije i naučite kako uspjeti na TikTok-u</p>
+  </div>
+
+  <div class="videos-grid" *ngIf="!isLoading; else loading">
+    <div class="video-card" *ngFor="let video of videos" (click)="playVideo(video)">
+      <div class="video-thumbnail">
+        <img [src]="video.thumbnailUrl" [alt]="video.title">
+        <div class="video-duration">{{ video.duration }}</div>
+      </div>
+      <div class="video-info">
+        <h3>{{ video.title }}</h3>
+        <p>{{ video.description }}</p>
+        <div class="video-meta">
+          <span class="upload-date">{{ video.uploadDate | date:'dd.MM.yyyy' }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #loading>
+    <div class="loading-spinner">
+      <div class="spinner"></div>
+      <p>Učitavanje videa...</p>
+    </div>
+  </ng-template>
+</div> 

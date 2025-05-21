@@ -1,119 +1,125 @@
 <!-- Contact Section -->
-<section id="contact" class="contact section mt-5 mb-5">
-  <!-- Section Title -->
-  <div class="container section-title text-center">
-    <h2 class="section-title-main">Kontakt</h2>
-    <div class="section-title-sub">Imate pitanje? Naš tim je uvijek tu za vas</div>
-  </div>
-  <!-- End Section Title -->
+<section class="contact">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="d-flex flex-column flex-lg-row gap-4 align-items-start">
+          <!-- Contact Info -->
+          <div class="contact-item mb-4 flex-fill" style="min-width:260px;max-width:350px;">
+            <h3>Kontaktirajte nas</h3>
+            <ul>
+              <li>
+                <i class="bi bi-envelope"></i>
+                <span>Email: info&#64;sonvyx.com</span>
+              </li>
+              <li>
+                <i class="bi bi-telephone"></i>
+                <span>Telefon: +387 33 123 456</span>
+              </li>
+              <li>
+                <i class="bi bi-geo-alt"></i>
+                <span>Adresa: Sarajevo, BiH</span>
+              </li>
+              <li>
+                <i class="bi bi-clock"></i>
+                <span>Radno vrijeme: 09:00 - 17:00</span>
+              </li>
+            </ul>
+          </div>
 
-  <div class="container mt-5" data-aos="fade" data-aos-delay="100">
-    <div class="row gy-4">
-      <div class="col-lg-12">
-        <form
-          [formGroup]="contactForm"
-          (ngSubmit)="onSubmit()"
-          class="php-email-form"
-          data-aos="fade-up"
-          data-aos-delay="200"
-        >
-          <div class="row gy-4">
-            <!-- Name Input -->
-            <div class="col-md-6">
-              <input
-                type="text"
-                formControlName="name"
-                class="form-control"
-                placeholder="Ime"
-              />
-              @if (isFormSubmitted || contactForm.get('name')?.dirty ||
-              contactForm.get('name')?.touched &&
-              contactForm.get('name')?.invalid) {
-              <div class="text-danger">
-                @if (contactForm.get('name')?.hasError('required')) {
-                <small>Ime je obavezno.</small>
-                } @if (contactForm.get('name')?.hasError('minlength')) {
-                <small>Ime mora sadržavati najmanje 3 znaka.</small>
+          <!-- Contact Form -->
+          <div class="contact-box flex-fill" style="min-width:260px;max-width:450px;">
+            <h2 class="section-title-main text-center">Kontakt</h2>
+            <div class="section-title-sub text-center mb-5">Imate pitanje? Naš tim je uvijek tu za vas</div>
+            
+            <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="php-email-form">
+              <div class="form-group">
+                <input
+                  type="text"
+                  formControlName="name"
+                  class="form-control"
+                  placeholder="Ime"
+                />
+                @if (isFormSubmitted || contactForm.get('name')?.dirty ||
+                contactForm.get('name')?.touched &&
+                contactForm.get('name')?.invalid) {
+                <div class="text-danger">
+                  @if (contactForm.get('name')?.hasError('required')) {
+                  <small>Ime je obavezno.</small>
+                  } @if (contactForm.get('name')?.hasError('minlength')) {
+                  <small>Ime mora sadržavati najmanje 3 znaka.</small>
+                  }
+                </div>
                 }
               </div>
-              }
-            </div>
 
-            <!-- Email Input -->
-            <div class="col-md-6">
-              <input
-                type="email"
-                formControlName="email"
-                class="form-control"
-                placeholder="Email"
-              />
-              @if (isFormSubmitted || contactForm.get('email')?.dirty ||
-              contactForm.get('email')?.touched &&
-              contactForm.get('email')?.invalid) {
-              <div class="text-danger">
-                @if (contactForm.get('email')?.hasError('required')) {
-                <small>Email je obavezan.</small>
-                } @if (contactForm.get('email')?.hasError('email')) {
-                <small>Molimo Vas unesite validnu Email adresu.</small>
+              <div class="form-group">
+                <input
+                  type="email"
+                  formControlName="email"
+                  class="form-control"
+                  placeholder="Email"
+                />
+                @if (isFormSubmitted || contactForm.get('email')?.dirty ||
+                contactForm.get('email')?.touched &&
+                contactForm.get('email')?.invalid) {
+                <div class="text-danger">
+                  @if (contactForm.get('email')?.hasError('required')) {
+                  <small>Email je obavezan.</small>
+                  } @if (contactForm.get('email')?.hasError('email')) {
+                  <small>Molimo Vas unesite validnu Email adresu.</small>
+                  }
+                </div>
                 }
               </div>
-              }
-            </div>
 
-            <!-- Subject Input -->
-            <div class="col-md-12">
-              <input
-                type="text"
-                formControlName="subject"
-                class="form-control"
-                placeholder="Naslov"
-              />
-              @if (isFormSubmitted || contactForm.get('subject')?.dirty ||
-              contactForm.get('subject')?.touched &&
-              contactForm.get('subject')?.invalid) {
-              <div class="text-danger">
-                @if (contactForm.get('subject')?.hasError('required')) {
-                <small>Naslov je obavezan.</small>
+              <div class="form-group">
+                <input
+                  type="text"
+                  formControlName="subject"
+                  class="form-control"
+                  placeholder="Naslov"
+                />
+                @if (isFormSubmitted || contactForm.get('subject')?.dirty ||
+                contactForm.get('subject')?.touched &&
+                contactForm.get('subject')?.invalid) {
+                <div class="text-danger">
+                  @if (contactForm.get('subject')?.hasError('required')) {
+                  <small>Naslov je obavezan.</small>
+                  }
+                </div>
                 }
               </div>
-              }
-            </div>
 
-            <!-- Message Textarea -->
-            <div class="col-md-12">
-              <textarea
-                class="form-control"
-                formControlName="message"
-                rows="6"
-                placeholder="Poruka"
-              ></textarea>
-              @if (isFormSubmitted || contactForm.get('message')?.dirty ||
-              contactForm.get('message')?.touched &&
-              contactForm.get('message')?.invalid) {
-              <div class="text-danger">
-                @if (contactForm.get('message')?.hasError('required')) {
-                <small>Poruka je obavezna.</small>
-                } @if (contactForm.get('message')?.hasError('minlength')) {
-                <small>Poruka mora sadržavati najmanje 10 znakova.</small>
+              <div class="form-group">
+                <textarea
+                  class="form-control"
+                  formControlName="message"
+                  rows="6"
+                  placeholder="Poruka"
+                ></textarea>
+                @if (isFormSubmitted || contactForm.get('message')?.dirty ||
+                contactForm.get('message')?.touched &&
+                contactForm.get('message')?.invalid) {
+                <div class="text-danger">
+                  @if (contactForm.get('message')?.hasError('required')) {
+                  <small>Poruka je obavezna.</small>
+                  } @if (contactForm.get('message')?.hasError('minlength')) {
+                  <small>Poruka mora sadržavati najmanje 10 znakova.</small>
+                  }
+                </div>
                 }
               </div>
-              }
-            </div>
 
-            <!-- Submit Button -->
-
-            <div class="col-md-12 text-end">
-              <button type="submit" class="contact-btn mb-5">
-                @if ( !loading){ Pošalji} @else{
-                <span class="spinner">Pošalji</span>
+              <button type="submit" class="btn btn-primary" [disabled]="!contactForm.valid || loading">
+                @if (!loading) { Pošalji } @else {
+                <span class="spinner"></span>
                 }
               </button>
-            </div>
+            </form>
           </div>
-        </form>
+        </div>
       </div>
-      <!-- End Contact Form -->
     </div>
   </div>
 </section>
-<!-- /Contact Section -->

@@ -1,0 +1,24 @@
+.layout-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content-wrapper {
+  flex: 1;
+}
+
+.no-aos {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+  animation: none !important;
+  pointer-events: auto !important;
+  visibility: visible !important;
+}
+
+app-navigation, app-footer {
+  display: block;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}

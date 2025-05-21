@@ -1,124 +1,118 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { RegistrationResponse } from './models/responses/contact.response.model';
-import { RegistrationService } from './services/registration.service';
 import { PaypalService } from '../../core/services/paypal/paypal.service';
 import { Package, PackageService } from '../../core/services/package.service';
+import { Router } from '@angular/router';
+
+declare const paypal: any;
 
 @Component({
   selector: 'app-registration',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, ReactiveFormsModule],
+  imports: [CommonModule, RouterOutlet],
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.scss'],
-  providers: [RegistrationService]
+  styleUrls: ['./registration.component.scss']
 })
-export class RegistrationComponent implements OnInit {
-  registrationForm!: FormGroup;
-  isFormSubmitted: boolean = false;
-  successMessage?: string = '';
+export class RegistrationComponent implements OnInit, OnDestroy {
   selectedPackage: Package | null = null;
+  private paypalButtonRendered = false;
 
   constructor(
-    private _fb: FormBuilder, 
-    private _registrationService: RegistrationService, 
     private _paypalService: PaypalService,
-    private _packageService: PackageService
+    private _packageService: PackageService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.initiateForm();
-    // Get the selected package from the service
     this.selectedPackage = this._packageService.getSelectedPackage();
+    if (!this.selectedPackage) {
+      this.router.navigate(['/pricing']);
+      return;
+    }
+    
+    this.initializePayPal();
   }
 
-  selectPackage(pkg: Package): void {
-    this.selectedPackage = pkg;
-    this._packageService.setSelectedPackage(pkg);
-  }
-
-  onSubmit = (): void => {
-    this.isFormSubmitted = true;
-
-    if (this.registrationForm.valid && this.selectedPackage) {
-      if (typeof window !== 'undefined') {
-        this._paypalService.loadPaypalScript().then(() => {
-          this.renderPaypalButton();
-        }).catch((error) => {
-          console.error(error);
-        });
-      }
-    } 
-  }
-
-  initiateForm = (): void => {
-    this.registrationForm = this._fb.group({
-      firstName: ['', [Validators.required, Validators.minLength(2)]],
-      lastName: ['', [Validators.required, Validators.minLength(2)]],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
-    });
-  }
-
-  private renderPaypalButton = (): void => {
+  ngOnDestroy(): void {
+    this.paypalButtonRendered = false;
     const container = document.getElementById('paypal-button-container');
     if (container) {
-      container.innerHTML = ''; 
-    }
-
-    if (window.paypal && this.selectedPackage) {
-      window.paypal.Buttons({
-        createOrder: (data: any, actions: any) => {
-          return actions.order.create({
-            purchase_units: [{
-              amount: {
-                value: this.selectedPackage?.price.toString() || '25.00',
-                currency_code: 'EUR',
-              }
-            }]
-          }).then((orderID: any) => {
-            console.log('Created order ID:', orderID);
-            return orderID;
-          });
-        },
-  
-        onApprove: (data: any, actions: any) => {
-          return actions.order.capture().then((details: any) => {
-            if (details.status === 'COMPLETED') {
-              console.log('Detalji:', details);
-              this.handleRegistrationConfirmation();
-            }
-          });
-        },
-  
-        onError: (err: any) => {
-          console.error('PayPal error:', err);
-        }
-      }).render('#paypal-button-container');
+      container.innerHTML = '';
     }
   }
 
-  private handleRegistrationConfirmation = (): void => {
-    if (this.selectedPackage) {
-      const registrationData = {
-        ...this.registrationForm.value,
-        packageId: this.selectedPackage.id
-      };
-      
-      this._registrationService
-        .registration(registrationData)
-        .subscribe({
-          next: (res: RegistrationResponse) => {
-            this.successMessage = res.message;
-          },
-          error: (errResponse: {
-            status: number;
-            error: { errors: { description: string }[] };
-          }) => {
-          },
-        });
+  private async initializePayPal(): Promise<void> {
+    try {
+      await this._paypalService.loadPaypalScript();
+      if (!this.paypalButtonRendered) {
+        await this.renderPaypalButton();
+      }
+    } catch (error) {
+      // Handle PayPal loading error silently
+    }
+  }
+
+  private async renderPaypalButton(): Promise<void> {
+    const container = document.getElementById('paypal-button-container');
+    if (!container || !window.paypal || !this.selectedPackage) {
+      return;
+    }
+
+    container.innerHTML = '';
+
+    try {
+      const buttons = window.paypal.Buttons({
+        // Customize button (optional)
+        style: {
+          layout: 'vertical',
+          color: 'blue',
+          shape: 'rect',
+          label: 'paypal'
+        },
+
+        // Create order
+        createOrder: (data: any, actions: any) => {
+          if (!this.selectedPackage?.price) {
+            throw new Error('Package price is not available');
+          }
+
+          return actions.order.create({
+            intent: "CAPTURE",
+            purchase_units: [{
+              description: `Package: ${this.selectedPackage.name}`,
+              amount: {
+                value: this.selectedPackage.price.toString()
+              }
+            }]
+          });
+        },
+
+        // Handle approve
+        onApprove: async (data: any, actions: any) => {
+          try {
+            const order = await actions.order.capture();
+            if (order.status === 'COMPLETED') {
+              this.router.navigate(['/login']);
+            }
+          } catch (error) {
+            // Handle capture error silently
+          }
+        }
+      });
+
+      // Check if the buttons can be rendered
+      const isEligible = await buttons.isEligible();
+      if (!isEligible) {
+        throw new Error('PayPal Buttons are not eligible');
+      }
+
+      // Render the buttons
+      await buttons.render('#paypal-button-container');
+      this.paypalButtonRendered = true;
+    } catch (error) {
+      this.paypalButtonRendered = false;
+      // Handle render error silently
     }
   }
 }

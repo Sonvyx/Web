@@ -1,46 +1,51 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
-import { LoginService } from './services/login.service';
 import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
+import { LoginRequest } from '../../features/models/login-request';
+import { LoginResponse } from '../../features/models/login-response';
+import { LoginService } from './services/login.service';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule]
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  errorMessage: string = '';
+  submitted = false;
 
   constructor(
-    private fb: FormBuilder,
     private loginService: LoginService,
-    private router: Router
+    private router: Router,
+    private fb: FormBuilder
   ) {
     this.loginForm = this.fb.group({
-      username: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
-  onSubmit() {
+  ngOnInit(): void {}
+
+  onSubmit(): void {
+    this.submitted = true;
+    
     if (this.loginForm.valid) {
-      const { username, password } = this.loginForm.value;
-      
-      this.loginService.login(username, password).subscribe({
-        next: (response) => {
-          if (response.token) {
-            localStorage.setItem('token', response.token);
-            this.router.navigate(['/dashboard']);
-          } else {
-            this.errorMessage = 'Login failed. Please try again.';
-          }
+      const loginRequest: LoginRequest = {
+        email: this.loginForm.get('email')?.value,
+        password: this.loginForm.get('password')?.value
+      };
+
+      this.loginService.login(loginRequest).subscribe({
+        next: (response: LoginResponse) => {
+          localStorage.setItem('token', response.token);
+          this.router.navigate(['/videos']);
         },
         error: (error) => {
-          this.errorMessage = error.error?.message || 'An error occurred during login.';
+          console.error('Login failed:', error);
         }
       });
     }

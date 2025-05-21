@@ -1,26 +1,38 @@
 import { Injectable } from '@angular/core';
+import { ConfigService } from '../config.service';
+
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class PaypalService {
-  private clientId: string = 'ASaptCrl2HoH7c37SP3AQK3dQUKseOJgQaRecGU08J6I8AvHjbs9ISEQiAVoc5il3mZgEUFo7EuuUc4Q';
+  private paypalScriptPromise: Promise<void> | null = null;
 
-  constructor() {}
+  constructor(private configService: ConfigService) {}
 
-  loadPaypalScript = (): Promise<void> => {
-  return new Promise((resolve, reject) => {
-    const existingScript = document.querySelector('script[src*="paypal.com/sdk/js"]');
-    if (existingScript) {
-      resolve(); 
-      return;
+  loadPaypalScript(): Promise<void> {
+    if (this.paypalScriptPromise) {
+      return this.paypalScriptPromise;
     }
 
-    const script = document.createElement('script');
-    script.src = `https://www.paypal.com/sdk/js?client-id=${this.clientId}&currency=USD&intent=capture`;
-    script.onload = () => resolve();
-    script.onerror = () => reject('PayPal SDK could not be loaded.');
-    document.body.appendChild(script);
-   });
-}
+    this.paypalScriptPromise = new Promise<void>((resolve, reject) => {
+      // Remove any existing PayPal scripts first
+      const existingScript = document.querySelector('script[src*="paypal.com/sdk/js"]');
+      if (existingScript) {
+        existingScript.remove();
+      }
 
+      const script = document.createElement('script');
+      script.src = `https://www.sandbox.paypal.com/sdk/js?client-id=${
+        this.configService.getConfig().paypalClientId
+      }&currency=EUR`;
+      
+      script.async = true;
+      script.onload = () => resolve();
+      script.onerror = () => reject();
+
+      document.body.appendChild(script);
+    });
+
+    return this.paypalScriptPromise;
+  }
 }

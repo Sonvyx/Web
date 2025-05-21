@@ -1,13 +1,15 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './features/login/login.component';
+import { HomeComponent } from './features/home/home.component';
+import { AuthGuard } from './core/auth/auth-interceptor';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent },
   {
-    path: 'home',
+    path: 'login',
     loadComponent: () =>
-      import('./features/home/home.component').then(
-        (m) => m.HomeComponent
+      import('./features/login/login.component').then(
+        (m) => m.LoginComponent
       ),
   },
   {
@@ -18,10 +20,26 @@ export const routes: Routes = [
       ),
   },
   {
-    path: 'login',
+    path: 'pricing',
     loadComponent: () =>
-      import('./features/login/login.component').then(
-        (m) => m.LoginComponent
+      import('./features/pricing/pricing.component').then(
+        (m) => m.PricingComponent
       ),
   },
+  {
+    path: 'videos',
+    loadComponent: () =>
+      import('./features/videos/videos.component').then(
+        (m) => m.VideosComponent
+      ),
+  },
+  {
+    path: 'dashboard',
+    canActivate: [AuthGuard],
+    loadComponent: () =>
+      import('./features/dashboard/dashboard.component').then(
+        (m) => m.DashboardComponent
+      ),
+  },
+  { path: '**', redirectTo: '/home' }
 ];

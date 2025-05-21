@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { FooterComponent } from './features/footer/footer.component';
 import { NavigationComponent } from './features/navigation/navigation.component';
 import { ScrollRestorationService } from './core/services/scrollposition.service';
 import { ConfigService } from './core/services/config.service';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -16,9 +17,15 @@ import { ConfigService } from './core/services/config.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+  showNavAndFooter = true;
 
-  constructor(private _scrollRestorationService: ScrollRestorationService, private configService: ConfigService) {
-
+  constructor(private _scrollRestorationService: ScrollRestorationService, private configService: ConfigService, private router: Router) {
+    this.router.events
+      .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
+      .subscribe((event) => {
+        console.log('Current URL:', event.urlAfterRedirects);
+        this.showNavAndFooter = !['/login'].includes(event.urlAfterRedirects);
+      });
   }
   
   ngOnInit(): void {
@@ -29,3 +36,4 @@ export class AppComponent implements OnInit {
     this.configService.loadConfig().subscribe();
   }
 }
+

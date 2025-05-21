@@ -19,7 +19,7 @@ export class NavigationComponent {
   @HostListener('window:scroll', [])
 
   onWindowScroll = (): void => {
-    this.isScrolled = window.scrollY > 40;
+    this.isScrolled = window.scrollY > 20;
     this.checkBackgroundColor();
   }
 

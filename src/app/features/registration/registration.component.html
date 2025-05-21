@@ -20,78 +20,11 @@
             </div>
           </ng-template>
 
-          <!-- Registration Form -->
+          <!-- PayPal Button -->
           <div class="registration-box flex-fill" style="min-width:260px;max-width:450px;">
             <h2 class="section-title-main text-center">Registracija</h2>
             <div class="section-title-sub text-center mb-5">Pridružite se našoj zajednici i započnite zarađivati</div>
-            <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
-              <div class="form-group">
-                <input
-                  type="text"
-                  id="firstName"
-                  formControlName="firstName"
-                  class="form-control"
-                  placeholder="Unesite ime"
-                />
-                @if (isFormSubmitted || registrationForm.get('firstName')?.dirty || registrationForm.get('firstName')?.touched && registrationForm.get('firstName')?.invalid) {
-                  @if (registrationForm.get('firstName')?.hasError('required')) {
-                    <div class="error-message">Ime je obavezno.</div>
-                  }
-                }
-              </div>
-              <div class="form-group">
-                <input
-                  type="text"
-                  id="lastName"
-                  formControlName="lastName"
-                  class="form-control"
-                  placeholder="Unesite prezime"
-                />
-                @if (isFormSubmitted || registrationForm.get('lastName')?.dirty || registrationForm.get('lastName')?.touched && registrationForm.get('lastName')?.invalid) {
-                  @if (registrationForm.get('lastName')?.hasError('required')) {
-                    <div class="error-message">Prezime je obavezno.</div>
-                  }
-                }
-              </div>
-              <div class="form-group">
-                <input
-                  type="email"
-                  id="email"
-                  formControlName="email"
-                  class="form-control"
-                  placeholder="Unesite email"
-                />
-                @if (isFormSubmitted || registrationForm.get('email')?.dirty || registrationForm.get('email')?.touched && registrationForm.get('email')?.invalid) {
-                  @if (registrationForm.get('email')?.hasError('required')) {
-                    <div class="error-message">Email je obavezan.</div>
-                  }
-                  @if (registrationForm.get('email')?.hasError('email')) {
-                    <div class="error-message">Molimo unesite validan email.</div>
-                  }
-                }
-              </div>
-              <div class="form-group">
-                <input
-                  type="password"
-                  id="password"
-                  formControlName="password"
-                  class="form-control"
-                  placeholder="Unesite lozinku"
-                />
-                @if (isFormSubmitted || registrationForm.get('password')?.dirty || registrationForm.get('password')?.touched && registrationForm.get('password')?.invalid) {
-                  @if (registrationForm.get('password')?.hasError('required')) {
-                    <div class="error-message">Lozinka je obavezna.</div>
-                  }
-                  @if (registrationForm.get('password')?.hasError('minlength')) {
-                    <div class="error-message">Lozinka mora imati najmanje 8 karaktera.</div>
-                  }
-                }
-              </div>
-              <button type="submit" class="btn btn-primary" [disabled]="!registrationForm.valid || !selectedPackage">
-                Registruj se
-              </button>
-              <div id="paypal-button-container" class="mt-4"></div>
-            </form>
+            <div id="paypal-button-container" class="mt-4"></div>
           </div>
         </div>
       </div>

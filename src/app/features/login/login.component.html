@@ -1,44 +1,33 @@
 <div class="login-container">
   <div class="login-box">
-    <h2 class="section-title-main text-center">Prijava</h2>
-    <div class="section-title-sub text-center mb-5">Pristupite svom Sonvyx nalogu</div>
+    <h2>Prijava</h2>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
+        <label for="email">Email</label>
         <input
-          type="text"
-          id="username"
-          formControlName="username"
-          class="form-control"
-          placeholder="Unesite korisničko ime"
-        >
-        <div class="error-message" *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.errors?.['required']">
-          Korisničko ime je obavezno
+          type="email"
+          id="email"
+          formControlName="email"
+        />
+        <div class="validation-error" *ngIf="(loginForm.get('email')?.invalid && loginForm.get('email')?.touched) || (submitted && loginForm.get('email')?.invalid)">
+          <div *ngIf="loginForm.get('email')?.errors?.['required']">Email je obavezan</div>
+          <div *ngIf="loginForm.get('email')?.errors?.['email']">Unesite validan email</div>
         </div>
       </div>
-
       <div class="form-group">
+        <label for="password">Lozinka</label>
         <input
           type="password"
           id="password"
           formControlName="password"
-          class="form-control"
-          placeholder="Unesite lozinku"
-        >
-        <div class="error-message" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors?.['required']">
-          Lozinka je obavezna
-        </div>
-        <div class="error-message" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors?.['minlength']">
-          Lozinka mora imati najmanje 6 karaktera
+        />
+        <div class="validation-error" *ngIf="(loginForm.get('password')?.invalid && loginForm.get('password')?.touched) || (submitted && loginForm.get('password')?.invalid)">
+          <div *ngIf="loginForm.get('password')?.errors?.['required']">Lozinka je obavezna</div>
+          <div *ngIf="loginForm.get('password')?.errors?.['minlength']">Lozinka mora imati najmanje 6 karaktera</div>
         </div>
       </div>
-
-      <div class="error-message" *ngIf="errorMessage">
-        {{ errorMessage }}
-      </div>
-
-      <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">
-        Prijavi se
-      </button>
+      <a routerLink="/videos" class="home-link">Povratak na početnu</a>
+      <button type="submit">Prijavi se</button>
     </form>
   </div>
 </div> 
